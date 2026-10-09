@@ -1,0 +1,21 @@
+.footer {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter) calc(var(--nav-h) + 12px + env(safe-area-inset-bottom));
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-3);
+}
+
+.footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 8px;
+  color: var(--text-2);
+}
+
+/* The footer clears the fixed bottom nav itself, so the page above it doesn't need to. */
+:global(.container):has(~ .footer) {
+  padding-bottom: 8px;
+}

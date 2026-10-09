@@ -1,0 +1,112 @@
+.lead {
+  margin: 4px 0 0;
+}
+
+.prose p,
+.prose ul {
+  margin: 0 0 10px;
+}
+.prose ul {
+  padding-left: 20px;
+}
+.prose li + li {
+  margin-top: 6px;
+}
+.prose h3 {
+  font-size: 1rem;
+  margin: 16px 0 8px;
+}
+
+/* What's stored on this device */
+.stores {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.stores li {
+  padding: 12px 14px;
+}
+.stores li + li {
+  border-top: 1px solid var(--border);
+}
+.storeHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 10px;
+  font-weight: 600;
+}
+
+/* Analytics switch */
+.switchRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 44px;
+  padding: 12px 14px;
+  cursor: pointer;
+}
+.switchText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.switchLabel {
+  font-weight: 600;
+}
+.switch {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 0 0 auto;
+  position: relative;
+  width: 52px;
+  height: 32px;
+  margin: 0;
+  border-radius: 999px;
+  background: var(--text-3);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.switch::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+  transition: transform 0.15s;
+}
+.switch:checked {
+  background: var(--accent);
+}
+.switch:checked::before {
+  transform: translateX(20px);
+}
+.switch:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.switch:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  outline-offset: 2px;
+}
+
+.confirm {
+  padding: 14px;
+}
+.confirmText {
+  margin: 0 0 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .switch,
+  .switch::before {
+    transition: none;
+  }
+}
