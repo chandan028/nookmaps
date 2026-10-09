@@ -82,6 +82,20 @@ export function toggleSaved(place: Place): boolean {
   return !exists;
 }
 
+/** Remove one saved place; returns the remaining list. */
+export function removeSaved(id: string): SavedPlace[] {
+  const next = loadSaved().filter((p) => p.id !== id);
+  write(local(), SAVED_KEY, next);
+  return next;
+}
+
+/** Put back a place removed with `removeSaved` (undo), newest first. */
+export function restoreSaved(item: SavedPlace): SavedPlace[] {
+  const next = [...loadSaved().filter((p) => p.id !== item.id), item].sort((a, b) => b.savedAt - a.savedAt);
+  write(local(), SAVED_KEY, next);
+  return next;
+}
+
 /**
  * The last location the user chose, kept for this tab only (sessionStorage)
  * so plan / ask / detail screens can reuse it without re-prompting, and so it

@@ -7,10 +7,21 @@ function tzo(): string {
   return String(new Date().getTimezoneOffset());
 }
 
+/** A failed API call; `status` lets screens tell "not found" from "try again". */
+export class ApiError extends Error {
+  constructor(
+    message: string,
+    readonly status: number,
+  ) {
+    super(message);
+    this.name = "ApiError";
+  }
+}
+
 async function getJson<T>(url: string, init?: RequestInit): Promise<T> {
   const res = await fetch(url, init);
   const data = (await res.json().catch(() => ({}))) as T & { error?: string };
-  if (!res.ok) throw new Error(data.error ?? `Request failed (${res.status})`);
+  if (!res.ok) throw new ApiError(data.error ?? `Request failed (${res.status})`, res.status);
   return data;
 }
 
