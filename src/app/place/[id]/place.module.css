@@ -1,0 +1,362 @@
+/* Place detail (PRD §14, §15). Builds on the tokens and utilities in globals.css. */
+
+.page {
+  padding-top: 4px;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 52px;
+  padding-top: env(safe-area-inset-top);
+}
+.back {
+  margin-left: -12px;
+  min-height: 44px;
+}
+
+/* ---------- Photos ---------- */
+
+.gallery {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 86%;
+  gap: 8px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  margin: 0 calc(-1 * var(--gutter));
+  padding: 0 var(--gutter);
+  scroll-padding: 0 var(--gutter);
+  scrollbar-width: none;
+}
+.gallery::-webkit-scrollbar {
+  display: none;
+}
+.gallerySingle {
+  grid-auto-columns: 100%;
+}
+@media (min-width: 640px) {
+  .gallery {
+    grid-auto-columns: 62%;
+  }
+  .gallerySingle {
+    grid-auto-columns: 100%;
+  }
+}
+
+.photo {
+  position: relative;
+  margin: 0;
+  scroll-snap-align: start;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface-2);
+  aspect-ratio: 4 / 3;
+  max-height: 300px;
+}
+.gallerySingle .photo {
+  aspect-ratio: 16 / 9;
+}
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.credit {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 18px 10px 6px;
+  font-size: 0.72rem;
+  color: #fff;
+  background: linear-gradient(transparent, rgb(0 0 0 / 0.65));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.credit a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.heroFallback {
+  height: 132px;
+  border-radius: var(--radius);
+  display: grid;
+  place-items: center;
+  font-size: 56px;
+  background:
+    radial-gradient(circle at 30% 20%, var(--accent-soft), transparent 70%),
+    var(--surface-2);
+}
+
+/* ---------- Header ---------- */
+
+.header {
+  padding: 16px 0 4px;
+}
+.category {
+  font-size: 0.85rem;
+  font-weight: 650;
+  color: var(--accent);
+}
+.extraCat {
+  color: var(--text-2);
+  font-weight: 500;
+  margin-left: 4px;
+}
+.name {
+  font-size: 1.6rem;
+  line-height: 1.2;
+  margin: 4px 0 6px;
+  overflow-wrap: anywhere;
+}
+.sponsored {
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+  font-size: 0.95rem;
+}
+.star {
+  color: #e6a100;
+}
+.warn {
+  color: var(--warn);
+  font-weight: 600;
+}
+.distance {
+  margin: 8px 0 0;
+  color: var(--text-2);
+  font-size: 0.92rem;
+}
+
+/* ---------- Actions ---------- */
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+.action {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 64px;
+  padding: 8px 2px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.action:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  outline-offset: 2px;
+}
+.action[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.actionPrimary {
+  flex-grow: 1.5;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+.actionIcon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+.actionLabel {
+  max-width: 100%;
+  font-size: 0.78rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- Info ---------- */
+
+.info {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+}
+.info > * + * {
+  border-top: 1px solid var(--border);
+}
+.infoRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  min-height: 48px;
+  font-size: 0.92rem;
+  overflow-wrap: anywhere;
+}
+.infoRow a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.hours summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  min-height: 48px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.92rem;
+}
+.hours summary::-webkit-details-marker {
+  display: none;
+}
+.summaryHint {
+  margin-left: auto;
+  color: var(--text-2);
+  font-size: 0.82rem;
+}
+.summaryHint::after {
+  content: " ▾";
+}
+.hours[open] .summaryHint::after {
+  content: " ▴";
+}
+.hoursTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin: 0 0 8px;
+}
+.hoursTable th,
+.hoursTable td {
+  text-align: left;
+  padding: 5px 14px 5px 46px;
+  font-weight: 400;
+  vertical-align: top;
+}
+.hoursTable td {
+  padding-left: 0;
+  color: var(--text-2);
+}
+.hoursTable .today th,
+.hoursTable .today td {
+  font-weight: 700;
+  color: var(--text);
+}
+.rawHours {
+  margin: 0;
+  padding: 0 14px 12px 46px;
+  font-size: 0.9rem;
+  color: var(--text-2);
+}
+
+/* ---------- What next? ---------- */
+
+.whatNextHead h2 {
+  font-size: 1.35rem;
+  margin: 2px 0 4px;
+}
+.group {
+  margin-top: 16px;
+}
+.groupTitle {
+  font-size: 1rem;
+  margin: 0 0 4px;
+  color: var(--text-2);
+  text-transform: none;
+}
+.subsection {
+  margin-top: 12px;
+}
+.subTitle {
+  font-size: 1.02rem;
+  margin: 0;
+}
+
+.credits {
+  margin-top: 28px;
+  text-align: center;
+}
+
+/* ---------- Feedback ---------- */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--nav-h) + 16px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 1100;
+  pointer-events: none;
+}
+.toast span {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  white-space: nowrap;
+}
+
+.empty {
+  text-align: center;
+  padding: 48px 8px;
+}
+.empty h1 {
+  font-size: 1.3rem;
+  margin: 8px 0;
+}
+.empty p {
+  margin: 0 0 20px;
+}
+.emptyIcon {
+  font-size: 44px;
+}
+
+/* ---------- Skeleton ---------- */
+
+.skelHero {
+  height: 200px;
+}
+.skelTitle {
+  height: 30px;
+  width: 70%;
+  margin-top: 10px;
+}
+.skelLine {
+  height: 14px;
+  margin-top: 14px;
+}
+.skelAction {
+  flex: 1 1 0;
+  height: 64px;
+  border-radius: var(--radius-sm);
+}
+.skelCard {
+  height: 80px;
+  margin-top: 16px;
+}
