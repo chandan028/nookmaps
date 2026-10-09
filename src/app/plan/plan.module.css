@@ -1,0 +1,133 @@
+/* Plan screen. Tokens and shared classes (.btn, .chip, .card…) come from globals.css. */
+
+.locate {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+  padding: 16px;
+}
+
+.locate p {
+  margin: 0;
+}
+
+.locateActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chips {
+  margin-top: 4px;
+}
+
+/* Chips are the main control here: give them a full touch target. */
+.chips :global(.chip) {
+  min-height: 44px;
+  padding: 8px 16px;
+}
+
+.hint {
+  margin: 12px 0 0;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.skeletonSummary {
+  height: 76px;
+}
+
+.skeletonStop {
+  height: 168px;
+  margin-left: 94px;
+}
+
+.error {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.empty {
+  margin-top: 16px;
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.empty p {
+  margin: 0;
+  color: var(--text-2);
+}
+
+.emptyIcon {
+  margin-bottom: 6px;
+  font-size: 1.8rem;
+}
+
+.result {
+  margin-top: 16px;
+  transition: opacity 0.15s ease;
+}
+
+.stale {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 14px 16px;
+}
+
+.summaryText {
+  min-width: 0;
+}
+
+.total {
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.summaryActions {
+  display: flex;
+  gap: 8px;
+}
+
+.summaryActions :global(.btn) {
+  min-width: 96px;
+}
+
+.note {
+  margin: -6px 0 14px;
+}
+
+@media (max-width: 380px) {
+  .summaryActions {
+    width: 100%;
+  }
+
+  .summaryActions :global(.btn) {
+    flex: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .result {
+    transition: none;
+  }
+}
