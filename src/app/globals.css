@@ -70,7 +70,7 @@ img { max-width: 100%; display: block; }
 .stack { display: flex; flex-direction: column; gap: 12px; }
 .row { display: flex; align-items: center; gap: 8px; }
 .wrap { flex-wrap: wrap; }
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; border: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Buttons */
 .btn {
@@ -93,7 +93,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* Chips */
-.chips { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 8px; scrollbar-width: none; }
+.chips { position: relative; display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 8px; scrollbar-width: none; }
 .chips::-webkit-scrollbar { display: none; }
 .chip {
   flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px;
@@ -118,6 +118,7 @@ img { max-width: 100%; display: block; }
 .place-card .body { min-width: 0; flex: 1; }
 .place-card .name { font-weight: 650; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .meta { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 0.85rem; color: var(--text-2); }
+.meta > * { white-space: nowrap; }
 .open { color: var(--open); font-weight: 600; }
 .closed { color: var(--closed); font-weight: 600; }
 .badge {
@@ -127,7 +128,7 @@ img { max-width: 100%; display: block; }
 .badge-sponsored { background: #fff3c4; color: #6b5300; }
 
 /* Horizontal rails */
-.rail { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(260px, 82%); gap: 10px; overflow-x: auto; padding-bottom: 6px; scroll-snap-type: x mandatory; }
+.rail { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(260px, 82%); gap: 10px; overflow-x: auto; padding-bottom: 6px; scroll-snap-type: x mandatory; }
 .rail > * { scroll-snap-align: start; }
 @media (min-width: 640px) { .rail { grid-auto-columns: minmax(280px, 46%); } }
 
