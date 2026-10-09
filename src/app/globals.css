@@ -1,0 +1,158 @@
+/* NookMaps design tokens. Mobile-first; light and dark. */
+:root {
+  --bg: #faf8f5;
+  --surface: #ffffff;
+  --surface-2: #f2efea;
+  --text: #1c1b19;
+  --text-2: #5b5852;
+  --text-3: #8a867e;
+  --border: #e6e1d8;
+  --accent: #e2572b;
+  --accent-ink: #ffffff;
+  --accent-soft: #fde9e1;
+  --open: #1f8a4c;
+  --closed: #b3261e;
+  --warn: #a86400;
+  --radius: 14px;
+  --radius-sm: 10px;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.05), 0 4px 16px rgb(0 0 0 / 0.06);
+  --gutter: 16px;
+  --max: 720px;
+  --nav-h: 64px;
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121110;
+    --surface: #1c1b19;
+    --surface-2: #262420;
+    --text: #f3f0ea;
+    --text-2: #bdb8ae;
+    --text-3: #8f8a80;
+    --border: #34312c;
+    --accent: #ff7a4d;
+    --accent-ink: #1a0d07;
+    --accent-soft: #3a2017;
+    --open: #4cc77f;
+    --closed: #ff8a80;
+    --warn: #f0b049;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.4);
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+img { max-width: 100%; display: block; }
+
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter) calc(var(--nav-h) + 24px + env(safe-area-inset-bottom));
+}
+
+.muted { color: var(--text-2); }
+.small { font-size: 0.875rem; }
+.tiny { font-size: 0.78rem; }
+.stack { display: flex; flex-direction: column; gap: 12px; }
+.row { display: flex; align-items: center; gap: 8px; }
+.wrap { flex-wrap: wrap; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 44px; padding: 10px 16px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  font-weight: 600; cursor: pointer; text-decoration: none; white-space: nowrap;
+}
+.btn:disabled { opacity: 0.55; cursor: default; }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn-ghost { background: transparent; border-color: transparent; }
+.btn-sm { min-height: 36px; padding: 6px 12px; font-size: 0.9rem; }
+.btn:focus-visible, .chip:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 60%, transparent); outline-offset: 2px;
+}
+
+.input {
+  width: 100%; min-height: 44px; padding: 10px 14px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--surface);
+}
+
+/* Chips */
+.chips { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 8px; scrollbar-width: none; }
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px;
+  min-height: 38px; padding: 6px 14px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--surface); cursor: pointer; font-weight: 500;
+}
+.chip[aria-pressed="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+/* Cards */
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.place-card {
+  display: flex; gap: 12px; padding: 12px; text-decoration: none; color: inherit; min-width: 0;
+}
+.place-card .thumb {
+  flex: 0 0 56px; height: 56px; border-radius: var(--radius-sm); background: var(--surface-2);
+  display: grid; place-items: center; font-size: 26px; overflow: hidden;
+}
+.place-card .thumb img { width: 100%; height: 100%; object-fit: cover; }
+.place-card .body { min-width: 0; flex: 1; }
+.place-card .name { font-weight: 650; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.meta { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 0.85rem; color: var(--text-2); }
+.open { color: var(--open); font-weight: 600; }
+.closed { color: var(--closed); font-weight: 600; }
+.badge {
+  display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;
+  background: var(--surface-2); color: var(--text-2); letter-spacing: 0.02em;
+}
+.badge-sponsored { background: #fff3c4; color: #6b5300; }
+
+/* Horizontal rails */
+.rail { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(260px, 82%); gap: 10px; overflow-x: auto; padding-bottom: 6px; scroll-snap-type: x mandatory; }
+.rail > * { scroll-snap-align: start; }
+@media (min-width: 640px) { .rail { grid-auto-columns: minmax(280px, 46%); } }
+
+.section { margin-top: 24px; }
+.section h2 { font-size: 1.15rem; margin: 0; }
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+.eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 700; }
+
+/* Header */
+.app-header { padding: 18px 0 8px; }
+.app-header h1 { font-size: 1.6rem; line-height: 1.2; margin: 4px 0; }
+
+/* Bottom nav */
+.bottom-nav {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 1000;
+  height: calc(var(--nav-h) + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom);
+  background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(10px);
+  border-top: 1px solid var(--border);
+}
+.bottom-nav ul { list-style: none; margin: 0 auto; padding: 0; max-width: var(--max); height: var(--nav-h); display: grid; grid-template-columns: repeat(4, 1fr); }
+.bottom-nav a { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 0.75rem; text-decoration: none; color: var(--text-2); }
+.bottom-nav a[aria-current="page"] { color: var(--accent); font-weight: 700; }
+.bottom-nav .icon { font-size: 1.25rem; line-height: 1; }
+
+.notice { padding: 12px 14px; border-radius: var(--radius-sm); background: var(--accent-soft); font-size: 0.9rem; }
+.skeleton { background: linear-gradient(90deg, var(--surface-2), var(--surface), var(--surface-2)); background-size: 200% 100%; animation: shimmer 1.2s infinite; border-radius: var(--radius); }
+@keyframes shimmer { to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } }
