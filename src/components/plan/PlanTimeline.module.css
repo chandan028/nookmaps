@@ -1,0 +1,207 @@
+/* Vertical itinerary: [time] [rail] [content]. Colours come from globals.css tokens. */
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 58px 28px minmax(0, 1fr);
+  column-gap: 8px;
+  align-items: stretch;
+}
+
+.time {
+  padding-top: 4px;
+  text-align: right;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-2);
+  white-space: nowrap;
+}
+
+/* The rail column draws the line that joins the stops. */
+.rail {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rail::after {
+  content: "";
+  flex: 1;
+  width: 2px;
+  background: var(--border);
+}
+
+.finish .rail::after {
+  display: none;
+}
+
+.node {
+  flex: 0 0 auto;
+  width: 12px;
+  height: 12px;
+  margin-top: 6px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: var(--bg);
+}
+
+.endpoint .endpointLabel {
+  padding: 2px 0 14px;
+  font-size: 0.9rem;
+  color: var(--text-2);
+}
+
+.finish .endpointLabel {
+  padding-bottom: 0;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Walking connector between stops: dashed line + "6 min walk". */
+.leg .rail::after {
+  width: 0;
+  background: none;
+  border-left: 2px dashed var(--border);
+}
+
+.legLabel {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 4px 0;
+  font-size: 0.85rem;
+  color: var(--text-2);
+}
+
+.legDistance {
+  color: var(--text-3);
+}
+
+.marker {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.stop {
+  padding-bottom: 2px;
+}
+
+.stop .time {
+  padding-top: 5px;
+  color: var(--text);
+}
+
+/* Stop card */
+.card {
+  padding: 12px;
+  min-width: 0;
+}
+
+.cardHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2px 10px;
+  margin-bottom: 8px;
+}
+
+.slot {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.stay {
+  font-size: 0.8rem;
+  color: var(--text-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.place {
+  display: flex;
+  gap: 12px;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.thumb {
+  flex: 0 0 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  font-size: 24px;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+.name {
+  overflow: hidden;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.why {
+  margin: 10px 0 0;
+  font-size: 0.85rem;
+  color: var(--text-2);
+}
+
+.warn {
+  margin: 6px 0 0;
+  font-size: 0.8rem;
+  color: var(--warn);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* Compact look, but still a 44px touch target. */
+.actions :global(.btn) {
+  min-height: 44px;
+}
+
+@media (min-width: 640px) {
+  .row {
+    grid-template-columns: 72px 32px minmax(0, 1fr);
+    column-gap: 10px;
+  }
+}
