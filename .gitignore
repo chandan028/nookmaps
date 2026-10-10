@@ -6,3 +6,4 @@ coverage/
 .env*.local
 .env
 .DS_Store
+.claude/worktrees/

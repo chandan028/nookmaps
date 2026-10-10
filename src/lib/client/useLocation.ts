@@ -26,6 +26,9 @@ export function useLocation() {
   const [error, setError] = useState<string | null>(null);
   const locRef = useRef<StoredLocation | null>(null);
   locRef.current = location;
+  // Bumped whenever the user picks a location, so a slow GPS fix that lands
+  // afterwards can't overwrite their newer choice.
+  const generation = useRef(0);
 
   useEffect(() => {
     const last = loadLastLocation();
@@ -51,8 +54,10 @@ export function useLocation() {
           return;
         }
         if (!opts.silent) setStatus("requesting");
+        const gen = ++generation.current;
         navigator.geolocation.getCurrentPosition(
           (pos) => {
+            if (gen !== generation.current) return resolve(null);
             const loc: StoredLocation = {
               lat: pos.coords.latitude,
               lng: pos.coords.longitude,
@@ -65,6 +70,7 @@ export function useLocation() {
             resolve(loc);
           },
           (err) => {
+            if (gen !== generation.current) return resolve(null);
             if (err.code === err.PERMISSION_DENIED) {
               track("location_permission_denied");
               setStatus("denied");
@@ -83,6 +89,7 @@ export function useLocation() {
 
   const setManual = useCallback(
     (lat: number, lng: number, label?: string) => {
+      generation.current++;
       track("manual_location_set");
       apply({ lat, lng, source: "manual", label, at: Date.now() });
     },
@@ -94,8 +101,10 @@ export function useLocation() {
     const onVisible = () => {
       const current = locRef.current;
       if (document.visibilityState !== "visible" || current?.source !== "gps") return;
+      const gen = generation.current;
       navigator.geolocation?.getCurrentPosition(
         (pos) => {
+          if (gen !== generation.current || locRef.current?.source !== "gps") return;
           const next = { lat: pos.coords.latitude, lng: pos.coords.longitude };
           if (movedSignificantly(current, next, MOVEMENT_THRESHOLD_M)) {
             apply({ ...next, accuracyM: pos.coords.accuracy, source: "gps", at: Date.now() });
